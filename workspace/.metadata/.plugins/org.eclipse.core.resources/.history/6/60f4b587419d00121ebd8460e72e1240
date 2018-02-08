@@ -1,0 +1,234 @@
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
+import java.awt.Container;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.geom.Line2D;
+
+import javax.swing.*;
+public class HomeScreen extends JFrame{
+
+	
+	private JButton createJButton, loginJButton,helpJButton;
+	private JLabel accountNumberJLabel, passwordJLabel, logoJLabel,thumbJLabel,SIGNJLabel;
+	private JTextField accountNumberJTextField;
+	private JPasswordField passwordJPasswordField,newPasswordJPasswordField,retypeNewPasswordJPasswordField;
+	private JCheckBox loginJCheckBox;
+	private JTextField nameJTextField,  emailJTextField,  phoneJTextField,  addressJTextField, startBalanceJTextField;
+	
+	
+	
+	public HomeScreen()
+	{
+		 createUserInterface();
+	}
+	
+	private void createUserInterface()
+	{
+		Container contentPane = getContentPane();
+		contentPane.setLayout(null);
+		contentPane.setBackground(Color.white);
+		
+		//set up accountNumberJLabel
+		accountNumberJLabel = new JLabel("Enter Account Number:");
+		accountNumberJLabel.setBounds(250,-5,200,50);
+		contentPane.add( accountNumberJLabel );
+		
+		passwordJLabel = new JLabel("Enter Password:");
+		passwordJLabel.setBounds(270,25,200,50);
+		contentPane.add( passwordJLabel );
+		
+		accountNumberJTextField = new JTextField();
+		accountNumberJTextField.setBounds(400,10,100,20);
+		contentPane.add( accountNumberJTextField );
+		
+		passwordJPasswordField = new JPasswordField();
+		passwordJPasswordField.setBounds(400,40,100,20);
+		contentPane.add( passwordJPasswordField );
+		
+		loginJButton = new JButton(new ImageIcon("QQ20130403-1.png"));
+		loginJButton.setBounds(440,70,59,30);
+		contentPane.add( loginJButton );
+		
+		loginJCheckBox = new JCheckBox("Keep me logged in");
+		loginJCheckBox.setBounds(280,70,150,30);
+		contentPane.add( loginJCheckBox );
+		
+		logoJLabel = new JLabel(); 
+		logoJLabel.setIcon(new ImageIcon("rps.jpg"));
+		logoJLabel.setBounds(-50, -80, 270, 200);
+		logoJLabel.setHorizontalAlignment( JLabel.CENTER);
+	    contentPane.add( logoJLabel );
+	    
+	    thumbJLabel = new JLabel(); 
+	    thumbJLabel.setIcon(new ImageIcon("thumb.png"));
+	    thumbJLabel.setBounds(30, 125, 100, 100);
+	    thumbJLabel.setHorizontalAlignment( JLabel.CENTER);
+	    contentPane.add( thumbJLabel );
+	   
+	    
+	    SIGNJLabel= new JLabel(); 
+	    SIGNJLabel.setIcon(new ImageIcon("signUP.png"));
+	    SIGNJLabel.setBounds(40, 110, 500, 150);
+	    SIGNJLabel.setHorizontalAlignment( JLabel.CENTER);
+	    contentPane.add( SIGNJLabel );
+	    
+		
+	    nameJTextField = new JTextField("Click to Type in your name");
+	    nameJTextField.setBounds(50,275,185,40);
+		contentPane.add( nameJTextField );
+		nameJTextField.addMouseListener(
+				
+				new MouseAdapter()
+		{
+	    public void mouseClicked(MouseEvent e){
+	    	nameJTextField.setText("");
+	    
+		   }
+	    
+		}
+				
+		);	
+		  
+		
+		
+		emailJTextField = new JTextField("Email Address");
+		emailJTextField.setBounds(50,325,185,40);
+			contentPane.add( emailJTextField );
+		emailJTextField.addMouseListener(
+				
+					new MouseAdapter()
+			{
+		    public void mouseClicked(MouseEvent e){
+		    	emailJTextField.setText("");
+			   }
+		    
+			}
+					
+			);	
+		phoneJTextField= new JTextField("Phone Number");
+		phoneJTextField.setBounds(50,375,185,40);
+		contentPane.add( phoneJTextField );
+		phoneJTextField.addMouseListener(
+			
+				new MouseAdapter()
+		{
+	    public void mouseClicked(MouseEvent e){
+	    	phoneJTextField.setText("");
+		   }
+	    
+		}
+				
+		);	
+		
+		addressJTextField= new JTextField("Mailing Address");
+		addressJTextField.setBounds(50,425,185,40);
+		contentPane.add( addressJTextField );
+		addressJTextField.addMouseListener(
+			
+				new MouseAdapter()
+		{
+	    public void mouseClicked(MouseEvent e){
+	    	addressJTextField.setText("");
+		   }
+	    
+		}
+				
+		);	
+		
+		newPasswordJPasswordField= new JPasswordField("Enter your Password");
+		newPasswordJPasswordField.setBounds(250,275,185,40);
+		contentPane.add( newPasswordJPasswordField );
+		newPasswordJPasswordField.addMouseListener(
+			
+				new MouseAdapter()
+		{
+	    public void mouseClicked(MouseEvent e){
+	    	newPasswordJPasswordField.setText("");
+		   }
+	    
+		}
+				
+		);	
+		
+		
+		retypeNewPasswordJPasswordField= new JPasswordField("Retype your Password");
+		retypeNewPasswordJPasswordField.setBounds(250,325,185,40);
+		contentPane.add( retypeNewPasswordJPasswordField );
+		retypeNewPasswordJPasswordField.addMouseListener(
+			
+				new MouseAdapter()
+		{
+	    public void mouseClicked(MouseEvent e){
+	    	retypeNewPasswordJPasswordField.setText("");
+		   }
+	    
+		}
+				
+		);	
+		
+		startBalanceJTextField= new JTextField("Enter a starting Balance");
+		startBalanceJTextField.setBounds(250,375,185,40);
+		contentPane.add( startBalanceJTextField );
+		startBalanceJTextField.addMouseListener(
+			
+				new MouseAdapter()
+		{
+	    public void mouseClicked(MouseEvent e){
+	    	startBalanceJTextField.setText("");
+		   }
+	    
+		}
+				
+		);	
+	    
+	    
+	    createJButton = new JButton(new ImageIcon("QQ20130403-2.png"));
+		createJButton.setBounds(260,425,175,40);
+		createJButton.setText("Create");
+		contentPane.add( createJButton );
+		
+
+		
+		helpJButton = new JButton();
+		helpJButton.setBounds(447,445,15,15);
+		helpJButton.setText("?");
+		contentPane.add( helpJButton );
+		
+		
+		
+		
+		
+		setSize(500,500);
+		setTitle("Welcome to RPS Bank");
+		setVisible(true);
+		setResizable(false);
+		
+	}
+	public void paintComponent(Graphics g)
+	{
+		super.paintComponents(g);
+		
+		Graphics2D g2 = (Graphics2D) g;
+		
+		Line2D line = new Line2D.Double(250,270,30,290);
+		g2.draw(line);
+		g2.setPaint(Color.blue);
+		
+	}
+
+}

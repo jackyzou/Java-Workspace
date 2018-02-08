@@ -1,0 +1,85 @@
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+
+public class SignUpPage extends JFrame {
+
+	
+private JLabel cover,oritation;
+private JButton homeJButton,helpJButton, aboutJButton, exitJButton;
+
+private JButton createJButton, loginJButton ;
+	
+
+
+	
+	public SignUpPage()
+	{
+		 createUserInterface();
+		 
+	}
+	
+	
+	
+	private void createUserInterface()
+	{
+		Container contentPane = getContentPane();
+		contentPane.setLayout(null);
+		contentPane.setBackground(Color.white);
+		
+
+		homeJButton = new JButton();
+		homeJButton.setBounds(0,100,50,30);
+		contentPane.add( homeJButton );
+		
+	
+		oritation = new JLabel(new ImageIcon("TPS1"));
+		oritation.setBounds(0,0,700,135);
+		oritation.setVisible(true);
+		contentPane.add( oritation );
+		
+		
+		
+		
+		
+		
+		cover  = new JLabel(new ImageIcon("all"));
+		cover.setBounds(0, -35, 904, 674 );
+		cover.setVisible(false);
+		contentPane.add( cover );
+		
+		
+		setSize(695,587);
+		setTitle("Welcome to Travel Planner System");
+		setVisible(true);
+		setResizable(true);
+		
+	}
+	
+	
+	
+
+
+}
+

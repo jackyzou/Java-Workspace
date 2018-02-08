@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;0008.gif&apos; to &apos;PhoneCallingSystem/src/(default package)&apos;&#x0A;- Original project: &apos;MyButtonProject&apos;&#x0A;- Destination element: &apos;PhoneCallingSystem/src/(default package)&apos;&#x0A;- Original element: &apos;0008.gif&apos;" description="Copy file" destination="=PhoneCallingSystem/src&lt;" element1="src/0008.gif" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1382737995159" units="0" version="1.0"/>
+</session>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;Inventory.java&apos; to &apos;DepositWithdraw.java&apos;&#x0A;- Original project: &apos;The New banking System&apos;&#x0A;- Original element: &apos;Inventory.java&apos;&#x0A;- Renamed element: &apos;DepositWithdraw.java&apos;" description="Rename compilation unit &apos;Inventory.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;{Inventory.java" name="DepositWithdraw.java" references="false" stamp="1366252822660" version="1.0"/>
+</session>

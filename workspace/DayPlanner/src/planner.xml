@@ -1,0 +1,42 @@
+<?xml version = "1.0"?>
+    <!-- Travel Planner XML document -->
+    <!DOCTYPE planner SYSTEM "planner.dtd">
+
+    <planner>
+        <year value = "2001">
+           <date month = "12" day = "22">
+              <note time = "0630">Go to airport             </note>
+              <note time = "0930">Catch flight to Vancouver </note>
+           </date>
+        </year>
+
+        <year value = "2002">
+
+           <date month = "1" day = "3">
+              <note time = "1430">Catch flight to Washington DC </note>
+           </date>
+
+           <date month = "1" day = "8">
+              <note time = "0830">Leave Washington DC for New Zealand </note>
+           </date>
+
+           <date month = "1" day = "10">
+              <note time = "0800">Arrive in Auckland, New Zealand   </note>
+              <note time = "1130">Arrive in Queenstown, New Zealand </note>
+           </date>
+
+           <date month = "1" day = "22">
+              <note time = "1700">Leave Queenstown for Washington DC </note>
+              <note time = "1200">Meet Jim at LAX for a drink        </note>
+              <note time = "2000">Arrive back in Washington DC       </note>
+           </date>
+
+           <date month = "3" day = "22">
+              <note time = "2030"> Leave Washington DC for Sweden </note>
+           </date>
+
+           <date month = "3" day = "30">
+              <note time = "0800"> Leave Copenhagen for Washington DC </note>
+           </date>
+        </year>
+    </planner>

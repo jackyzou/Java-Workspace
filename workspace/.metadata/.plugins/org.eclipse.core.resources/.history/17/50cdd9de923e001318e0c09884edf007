@@ -1,0 +1,34 @@
+import java.awt.Container;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+
+public class GUI extends JFrame{
+
+	private JLabel pic;
+	
+	public GUI ()
+	{
+		createGUI();
+	}
+	
+	private void createGUI()
+	{
+		Container contentPane = getContentPane();
+		contentPane.setLayout(null);
+		
+		pic = new JLabel(new ImageIcon("buystrip_call_icon.png"));
+		pic.setBounds(0,0,50,50);
+		contentPane.add(pic);
+		
+		setTitle("hey");
+		setSize(300,300);
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

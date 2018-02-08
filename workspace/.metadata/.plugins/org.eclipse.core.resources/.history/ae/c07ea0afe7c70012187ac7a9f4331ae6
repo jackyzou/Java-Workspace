@@ -1,0 +1,651 @@
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Cursor;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.IOException;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+public class Home extends JFrame  {
+
+	
+private JLabel bottom, button1 ,button2,button3,logo,bar, signup,out,outagain,signInFirst ;
+	
+private JButton account, find, hotel, loginJButton, signUpJButton;
+
+private JLabel accountNumberJLabel, passwordJLabel;	private JTextField accountNumberJTextField;	private JCheckBox loginJCheckBox;
+private JPasswordField passwordJPasswordField;
+
+boolean mouseEntered;
+
+private JButton loginJButtonfirst;	
+
+public boolean loginState;
+private String pass;
+
+	public Home()
+	{
+		 createUserInterface();	 
+	}
+	
+
+
+	public void getLoginState(boolean a)
+	{
+		loginState = a;
+	}
+	public void getPassword(String p)
+	{
+		pass = p;
+	}
+	 
+	
+	private void createUserInterface()
+	{
+		
+		Container contentPane = getContentPane();
+		contentPane.setLayout(null);
+		contentPane.setBackground(Color.white);
+		
+		
+		
+		
+		out= new JLabel(new ImageIcon("out.png"));
+		out.setBounds(0, 0, 1024, 426 );
+		out.setVisible(false);
+		contentPane.add( out );
+		
+		
+		accountNumberJLabel = new JLabel("Enter your Name:");
+		accountNumberJLabel.setBounds(360,135,200,50);
+		accountNumberJLabel.setFont (new Font("Curlz MT", Font.PLAIN,27));
+		accountNumberJLabel.setVisible(false);
+		contentPane.add( accountNumberJLabel );
+		
+		passwordJLabel = new JLabel("Enter Password:");
+		passwordJLabel.setBounds(370,175,200,50);
+		passwordJLabel.setFont (new Font("Curlz MT", Font.PLAIN,27));
+		passwordJLabel.setVisible(false);
+		contentPane.add( passwordJLabel );
+		
+		accountNumberJTextField = new JTextField();
+		accountNumberJTextField.setBounds(550,153,100,20);
+		accountNumberJTextField.setVisible(false);
+		contentPane.add( accountNumberJTextField );
+		
+		passwordJPasswordField = new JPasswordField();
+		passwordJPasswordField.setBounds(550,193,100,20);
+		passwordJPasswordField.setVisible(false);
+		contentPane.add( passwordJPasswordField );
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+		
+		
+		
+		
+		
+		//This one is the real login button, which should be flagged///
+		loginJButtonfirst = new JButton(new ImageIcon("signIn.png"));
+		loginJButtonfirst.setBounds(560,250,68,30);
+		loginJButtonfirst.setVisible(false);
+		contentPane.add( loginJButtonfirst );
+		loginJButtonfirst.addActionListener(
+	    		  
+	    		  new ActionListener()
+	    		  {
+	    			  public void actionPerformed( ActionEvent event)
+	    			  {
+	    				
+	    				  loginJButtonfirstActionPerformed( event );
+		
+	    
+	    			  }
+
+					private void loginJButtonfirstActionPerformed(ActionEvent event) 
+					{
+						String acc = accountNumberJTextField.getText();
+						String psw = passwordJPasswordField.getText();
+						MasterClass.sendPass1(acc);
+
+						 if(acc.equals(""))
+						{
+							 JOptionPane.showMessageDialog(null,"Please enter your account number to Login","ERROR",
+	    	    					  JOptionPane.ERROR_MESSAGE);
+						}
+						else if(psw.equals(""))
+						{
+							JOptionPane.showMessageDialog(null,"Please enter your password to Login","ERROR",
+	    	    					  JOptionPane.ERROR_MESSAGE);
+						}
+						else if ( !(psw.equals(pass)))
+						{
+							JOptionPane.showMessageDialog(null,"The Password you typed in doesn't match. Please try again!","ERROR",
+	    	    					  JOptionPane.ERROR_MESSAGE);
+						}
+						/*else if(loginState==true)
+							{
+								setVisible(false);
+								System.out.print("This will be always login!");
+							}
+							*/
+						
+						else
+						{
+							
+							try {
+								MasterClass.readInfo(acc);
+								MasterClass.openAccountHomefromHome();
+								dispose();
+								
+							} catch (Exception e) 
+							{
+								 JOptionPane.showMessageDialog(null, "NO SUCH DIRECTORY",
+										 "ERROR", JOptionPane.ERROR_MESSAGE);
+							}
+							
+						}
+					
+						
+					}
+	    		  }
+	    		  );
+		loginJButtonfirst.addMouseListener( 
+				new MouseAdapter()
+				{
+				public void mouseEntered (MouseEvent me) { 
+					setCursor (Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				}
+				 public void mouseExited (MouseEvent me) { 
+					 setCursor (Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+				 }
+				 public void mouseClicked (MouseEvent m) { 
+					  int mouseclicked= m.getClickCount();
+					  System.out.print(mouseclicked);
+				}
+				}
+				 );
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		loginJCheckBox = new JCheckBox("Keep me logged in");
+		loginJCheckBox.setBounds(360,250,250,30);
+		loginJCheckBox.setFont (new Font("Bauhaus 93", Font.PLAIN,15));
+		loginJCheckBox.setVisible(false);
+		contentPane.add( loginJCheckBox );
+		loginJCheckBox.addActionListener( 
+	    	      
+		            new ActionListener() 
+		            {
+		               public void actionPerformed( ActionEvent event )
+		               {
+		            	 
+		            	   
+		            	   if((loginJCheckBox.isSelected()))
+		            	   {
+		            		   MasterClass.loginStateAlways();
+		            	   }
+		            	   
+		               }
+		               
+		            } 
+		            
+		         ); 
+		
+		
+		
+		signInFirst= new JLabel(new ImageIcon("SignInFirstNude.png"));
+		signInFirst.setBounds(200, -50, 600, 426 );
+		signInFirst.setVisible(false);
+		contentPane.add( signInFirst );
+		signInFirst.addMouseListener( 
+				new MouseAdapter()
+				{
+					public void mouseClicked (MouseEvent me) {
+						signInFirst.setVisible(false);
+						signInFirst.setVisible(false);
+						accountNumberJLabel.setVisible(false);	
+						passwordJLabel.setVisible(false);
+						accountNumberJTextField.setVisible(false);
+						passwordJPasswordField.setVisible(false);
+						loginJButtonfirst.setVisible(false);	
+						loginJCheckBox.setVisible(false);
+			
+					}
+					public void mouseEntered (MouseEvent me) { 
+						
+					    mouseEntered = true; 
+						outagain.setVisible(false);
+						out.setVisible(false);
+					    repaint(); 
+					 }
+
+
+					 public void mouseExited (MouseEvent me) { 
+
+					  mouseEntered = false; 
+					  out.setVisible(false);
+					  outagain.setVisible(false);
+					  repaint(); 
+					 } 
+				
+				}
+		);
+		
+		outagain = new JLabel(new ImageIcon("outagain.png"));
+		outagain.setBounds(0, 425, 1024, 22 );
+		outagain.setVisible(false);
+		contentPane.add( outagain );
+		
+		account = new JButton(new ImageIcon("col-icon1.png"));
+		account.setBounds(130, 350, 62, 62 );
+		account.setVisible(true);
+		contentPane.add( account );
+		account.addActionListener(
+	    		  
+	    		  new ActionListener()
+	    		  {
+	    			  public void actionPerformed( ActionEvent event)
+	    			  {
+	    				
+	    				  accountActionPerformed( event );
+		
+	    
+	    			  }
+
+					private void accountActionPerformed(ActionEvent event) 
+					{
+						signInFirst.setVisible(true);
+						accountNumberJLabel.setVisible(true);	
+						passwordJLabel.setVisible(true);
+						accountNumberJTextField.setVisible(true);
+						passwordJPasswordField.setVisible(true);
+						loginJButtonfirst.setVisible(true);	
+						loginJCheckBox.setVisible(true);
+					}
+	    		  }
+	    		  );
+		account.addMouseListener( 
+				new MouseAdapter()
+				{
+				public void mouseEntered (MouseEvent me) { 
+					setCursor (Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				}
+				 public void mouseExited (MouseEvent me) { 
+					 setCursor (Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+				 }
+				}
+				 );
+		
+		button1 = new JLabel(new ImageIcon("col-icon1.png"));
+		button1.setBounds(100, 320, 124, 124 );
+		button1.setVisible(true);
+		contentPane.add( button1 );
+		button1.addMouseListener( 
+				new MouseAdapter()
+				{
+				public void mouseEntered (MouseEvent me) { 
+			
+			    mouseEntered = true; 
+				outagain.setVisible(false);
+				out.setVisible(false);
+			
+			    repaint(); 
+			 }
+
+
+			 public void mouseExited (MouseEvent me) { 
+
+			  mouseEntered = false; 
+			  out.setVisible(false);
+			  outagain.setVisible(false);
+			 
+			  repaint(); 
+			 } 
+		
+}
+		);
+		
+		find = new JButton(new ImageIcon("col-icon2.png"));
+		find.setBounds(471, 350, 62, 62 );
+		find.setVisible(true);
+		contentPane.add( find );
+		find.addActionListener(
+	    		  
+	    		  new ActionListener()
+	    		  {
+	    			  public void actionPerformed( ActionEvent event)
+	    			  {
+	    				
+	    				  findActionPerformed( event );
+		
+	    
+	    			  }
+
+					private void findActionPerformed(ActionEvent event) 
+					{
+						signInFirst.setVisible(true);
+						accountNumberJLabel.setVisible(true);	
+						passwordJLabel.setVisible(true);
+						accountNumberJTextField.setVisible(true);
+						passwordJPasswordField.setVisible(true);
+						loginJButtonfirst.setVisible(true);	
+						loginJCheckBox.setVisible(true);
+					}
+	    		  }
+	    		  );
+		find.addMouseListener( 
+				new MouseAdapter()
+				{
+				public void mouseEntered (MouseEvent me) { 
+					setCursor (Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				}
+				 public void mouseExited (MouseEvent me) { 
+					 setCursor (Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+				 }
+				}
+				 );
+		
+		button2 = new JLabel(new ImageIcon("col-icon2.png"));
+		button2.setBounds(441, 320, 124, 124 );
+		button2.setVisible(true);
+		contentPane.add( button2 );
+		button2.addMouseListener( 
+				new MouseAdapter()
+				{
+				public void mouseEntered (MouseEvent me) { 
+			
+			    mouseEntered = true; 
+				outagain.setVisible(false);
+				out.setVisible(false);
+			    repaint(); 
+			 }
+
+
+			 public void mouseExited (MouseEvent me) { 
+
+			  mouseEntered = false; 
+			  out.setVisible(false);
+			  outagain.setVisible(false);
+			  repaint(); 
+			 } 
+		
+}
+		);
+		
+		hotel = new JButton(new ImageIcon("col-icon3.png"));
+		hotel.setBounds(790, 350, 62, 62 );
+		hotel.setVisible(true);
+		contentPane.add( hotel );
+		hotel.addActionListener(
+	    		  
+	    		  new ActionListener()
+	    		  {
+	    			  public void actionPerformed( ActionEvent event)
+	    			  {
+	    				
+	    				  hotelActionPerformed( event );
+		
+	    
+	    			  }
+
+					private void hotelActionPerformed(ActionEvent event) 
+					{
+						signInFirst.setVisible(true);
+						accountNumberJLabel.setVisible(true);	
+						passwordJLabel.setVisible(true);
+						accountNumberJTextField.setVisible(true);
+						passwordJPasswordField.setVisible(true);
+						loginJButtonfirst.setVisible(true);	
+						loginJCheckBox.setVisible(true);
+					}
+	    		  }
+	    		  );
+		hotel.addMouseListener( 
+				new MouseAdapter()
+				{
+				public void mouseEntered (MouseEvent me) { 
+					setCursor (Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				}
+				 public void mouseExited (MouseEvent me) { 
+					 setCursor (Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+				 }
+				}
+				 );
+		
+		button3 = new JLabel(new ImageIcon("col-icon3.png"));
+		button3.setBounds(759, 320, 124, 124 );
+		button3.setVisible(true);
+		contentPane.add( button3 );
+		button3.addMouseListener( 
+				new MouseAdapter()
+				{
+				public void mouseEntered (MouseEvent me) { 
+			
+			    mouseEntered = true; 
+				outagain.setVisible(false);
+				out.setVisible(false);
+			    repaint(); 
+			 }
+
+
+			 public void mouseExited (MouseEvent me) { 
+
+			  mouseEntered = false; 
+			  out.setVisible(false);
+			  outagain.setVisible(false);
+			  repaint(); 
+			 } 
+		
+}
+		);
+		
+		
+		logo = new JLabel(new ImageIcon("TPS-logo-med.png"));
+		logo.setBounds(0, 0, 100, 104 );
+		logo.setVisible(true);
+		contentPane.add( logo );
+		
+		
+		///This is the login on the top, this one is not the one you are working on///
+		loginJButton = new JButton(new ImageIcon("signIn.png"));
+		loginJButton.setBounds(815,8,73,28);
+		contentPane.add( loginJButton );
+		loginJButton.addActionListener(
+	    		  
+	    		  new ActionListener()
+	    		  {
+	    			  public void actionPerformed( ActionEvent event)
+	    			  {
+	    				
+	    				  loginJButtonActionPerformed( event );
+		
+	    
+	    			  }
+
+					private void loginJButtonActionPerformed(ActionEvent event) 
+					{
+						signInFirst.setVisible(true);
+						accountNumberJLabel.setVisible(true);	
+						passwordJLabel.setVisible(true);
+						accountNumberJTextField.setVisible(true);
+						passwordJPasswordField.setVisible(true);
+						loginJButtonfirst.setVisible(true);	
+						loginJCheckBox.setVisible(true);
+						
+		
+					}
+	    		  }
+	    		  );
+		loginJButton.addMouseListener( 
+				new MouseAdapter()
+				{
+				public void mouseEntered (MouseEvent me) { 
+			
+			    mouseEntered = true; 
+				outagain.setVisible(false);
+				out.setVisible(false);
+			    repaint(); 
+			 }
+
+
+			 public void mouseExited (MouseEvent me) { 
+
+			  mouseEntered = false; 
+			  out.setVisible(false);
+			  outagain.setVisible(false);
+			  repaint(); 
+			 } 
+		
+}
+		);
+		
+		
+		signUpJButton = new JButton(new ImageIcon("GOcreate.png"));
+		signUpJButton.setBounds(890,7,127,28);
+		contentPane.add( signUpJButton );
+		signUpJButton.addActionListener(
+	    		  
+	    		  new ActionListener()
+	    		  {
+	    			  public void actionPerformed( ActionEvent event)
+	    			  {
+	    				
+	    				  loginJButtonActionPerformed( event );
+		
+	    
+	    			  }
+
+					private void loginJButtonActionPerformed(ActionEvent event) 
+					{
+							MasterClass.signUp();
+					}
+	    		  }
+	    		  );
+		signUpJButton.addMouseListener( 
+				new MouseAdapter()
+				{
+				public void mouseEntered (MouseEvent me) { 
+			
+			    mouseEntered = true; 
+				outagain.setVisible(false);
+				out.setVisible(false);
+				setCursor (Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+			    repaint(); 
+			 }
+
+
+			 public void mouseExited (MouseEvent me) { 
+
+			  mouseEntered = false; 
+			  out.setVisible(false);
+			  outagain.setVisible(false);
+				 setCursor (Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+
+			  repaint(); 
+			 } 
+			
+		
+}
+		);
+		
+		bar= new JLabel(new ImageIcon("QQ20130503-4.png"));
+		bar.setBounds(0, 0, 1024, 40 );
+		bar.setVisible(true);
+		contentPane.add( bar );
+		
+		
+		
+		
+		
+	
+		bottom = new JLabel(new ImageIcon("bottom "));
+		bottom.setBounds(0, 40, 1024, 420 );
+		bottom.setVisible(true);
+		contentPane.add( bottom );
+
+		
+
+		setSize(1024,469);
+		setTitle("Welcome to the Travel Planner System");
+		setVisible(true);
+		setResizable(false);
+		
+		contentPane.addMouseListener( 
+				new MouseAdapter()
+				{
+				public void mouseEntered (MouseEvent me) { 
+			
+			    mouseEntered = true; 
+				outagain.setVisible(false);
+				out.setVisible(false);
+			    repaint(); 
+			 }
+
+
+			 public void mouseExited (MouseEvent me) { 
+
+			  mouseEntered = false; 
+			  out.setVisible(true);
+			  outagain.setVisible(true);
+			  repaint(); 
+			 } 
+		
+}
+		);
+				
+		
+	
+	
+
+	
+
+}}
+

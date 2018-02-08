@@ -1,0 +1,289 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+
+<head>
+<!-- $Id: install.html,v 1.7 1999/06/22 23:07:13 hzeller Exp $ -->
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+<meta NAME="Author" CONTENT="Henner Zeller">
+<title>Installation instructions</title>
+</head>
+
+<body BGCOLOR="#FFFFFF">
+
+<p ALIGN="CENTER">
+<a href="index.html"><img SRC="images/java-apache-project.gif" BORDER="0" WIDTH="609"
+HEIGHT="100"></a></p>
+
+<!-- HTML version of the installation instructions from the ../INSTALL file -->
+
+<h1 align=center>Apache JSSI</h1>
+<h4 align=center>Version 1.1.2</h4>
+<h3 align=center>Installation instructions</h3>
+
+These are part of the installation instructions that come with 
+the README/INSTALL files with
+the <a href="http://java.apache.org/jservssi/dist/">distribution</a>.
+
+<h3>Requirements</h3>
+<blockquote>  
+<ul>
+    <li>  Any servlet engine compatible with the 2.0 Servlet API specification
+       (the use of Apache JServ is highly recommended). Note that the
+       JSDK 2.1 isn't supported yet and the SSI servlet may or may not
+       work with JSDK 2.1 compliant servlet engines.
+       
+    <li>  Any Java 1.1 compatible compiler
+</ul>
+</blockquote>
+
+<h3>Installation</h3>
+<h4>Compiling</h4>
+<blockquote>
+<p>
+     You need to have the Java Servlet API (JSDK) 2.0 in your CLASSPATH to 
+     compile Apache JSSI. Please get this from: 
+     <a href="http://java.sun.com/products/servlet/" target="_top">http://java.sun.com/products/servlet/</a>
+<p>
+     To compile the source code, go to the src/java directory and
+     type:
+<pre>
+     $ make
+</pre>
+     you'll get ApacheJSSI.jar
+<p>
+     If you grabbed the distribution, the ApacheJSSI.jar is already compiled
+     for you.
+<p>
+</blockquote>
+
+<h4>Installing</h4>
+<h5>Apache JServ</h5>
+<blockquote>
+<p>
+       In order to include the Apache JSSI classes in your servlet 
+       engine, you have to enable the server side inclusion by mapping the 
+       ".jhtml" URI to the "org.apache.servlet.ssi.SSI" servlet by doing 
+       the following:
+<p>
+       In your Apache config file add:
+<pre>
+         ApJServAction .jhtml /servlets/org.apache.servlet.ssi.SSI
+</pre>
+
+       Change the /servlets/ part to be the location of your zone.
+
+       In your zone.properties file add the ApacheJSSI.jar to
+       your repository:
+<pre>
+         repositories=/path/to/ApacheJSSI.jar
+</pre>
+
+       Change the /path/to/ part to be the path to the location of your 
+       ApacheJSSI.jar file.
+<p>
+       If you would like to use the URL-Rewriting feature, use the
+       org.apache.servlet.ssi.ParameterPropagatingSSI - Servlet instead.
+       Consult the <a href="parameterprop.html">documentation</a> 
+       for further information.
+</blockquote>
+
+<h5>Other Servlet Engines</h5>
+<blockquote>
+<p>
+       Apache JSSI will work with other servlet engines that meet the 
+       requirements defined above. Please see the Apache JServ installation 
+       instructions for hints on how to configure your servlet engine in 
+       order to do suffix/action mapping.
+</blockquote>
+
+<a name="tradssi">
+<h5>Servlet Parameters</h5>
+<blockquote>
+<p>
+The SSI Servlet understands some optional parameters which can be given in the
+init Arguments:
+<ul>
+<li> <strong><code>SSISiteRoot</code></strong> <em>(path)</em><br>
+       In order to use traditional SSI directives (&lt;!--#..),
+       pass the following init argument to the "org.apache.servlet.ssi.SSI" 
+       servlet (by following your servlet engine instructions):
+<pre>
+       SSISiteRoot=/site/root
+</pre>
+       Replace /site/root by the top level directory of your site.
+       This is the <code>DocumentRoot</code> in your Apache 
+       configuration file.
+<p>
+       Beware, the SSI directives are not (yet) fully implemented. See
+       <a href="traditionalssi.html">documentation</a>.
+<p>
+<li> <strong><code>expires</code></strong> <em>(integer)</em><br>
+     SSI documents usually contain dynamic content and thus shouldn't
+     be cached by clients. With the <code>expires</code> parameter you
+     can give the number of seconds after the generated document
+     should be considered stale. Use negative values to prevent
+     caching (expiration in the past).<br>
+     This sets the <code>Expires</code> header (
+     <a href="http://andrew2.andrew.cmu.edu/rfc/rfc2068.html" target="rfc">RFC2068</a>,
+     <a href="http://andrew2.andrew.cmu.edu/rfc/rfc2068.html#sec-14.21" target="rfc">14.21</a>).
+<p>
+<a name="compresslarge">
+<li> <strong><code>compresslarge</code></strong> <em>(size in Bytes)</em><br>
+     <strong><em>experimental</em></strong>. 
+     If the output becomes larger than the given number
+     of bytes, it is compressed. The size of the output which
+     decides whether deflation is used or not is a heuristic value
+     based on the size of the last generated pagesizes. It is a weighted
+     mean value: 1/2*(size of lastpage) + 1/4*(size of the page before) + 1/8*...
+     First call of the page will not be compressed.
+<p>
+     Output is only compressed if the browser supplies the
+     <code>Accept-Encoding</code> Header. Supported compress algorithms are
+     <em>gzip</em> and <em>compress</em>. <strong>Note</strong> that
+     compression uses CPU cycles and takes a bit of
+     time. So using this option may not make much sense for the 
+     int<strong>ra</strong>net but may be useful for 
+     pages larger than several 10s kB
+     served to the int<strong>er</strong>net (I'd love it if this would be done
+     on slashdot ..)
+     See the output of your access_log for result: typical pages
+     become 5-10 times smaller with compression.
+<p>
+     <em>MS Internet Explorer seems to be buggy regarding this: it
+     claims in the Accept-Encoding header to accept gzip'ed content but
+     displays garbage, so compression is turned off if the String
+     <strong>MSIE</strong> is found in the User-Agent header. If you
+     find other browsers which are buggy or a solution to this problem
+     please write to the <a
+  href="http://java.apache.org/main/mail.html">Java Apache Mailing List</a>
+    with [jservssi] included in the Subject.
+     </em>
+<p>
+     This evaluates the <code>Accept-Encoding</code> header and
+     sets the <code>Content-Encoding</code> and
+     <code>Vary</code> headers (
+     <a href="http://andrew2.andrew.cmu.edu/rfc/rfc2068.html" target="rfc">RFC2068</a>,
+     <a href="http://andrew2.andrew.cmu.edu/rfc/rfc2068.html#sec-14.3" target="rfc">14.3</a>, 
+     <a href="http://andrew2.andrew.cmu.edu/rfc/rfc2068.html#sec-14.12" target="rfc">14.12</a>, 
+     <a href="http://andrew2.andrew.cmu.edu/rfc/rfc2068.html#sec-14.43" target="rfc">14.43</a>).
+<p>
+<li> <strong><code>buffered</code></strong> <em>(&quot;yes&quot;|&quot;no&quot;)</em><br>
+     - default no -<br>
+     Buffer the Output of the SSI servlet. This is needed if you want to
+     set headers within in the included servlets which should affect the
+     whole output. Use this if you need to set headers (i.e. cookies, esp.
+     if you want to use <strong>cookie based session handling</strong>; 
+     see documentation of
+     your servlet engine). Another feature is, that output is a bit faster
+     than without buffering if you have many 'active' places in the Page, 
+     e.g. doing URL rewriting with the ParameterPropagatingSSI.
+<p>
+     Drawbacks are, that this uses a bit more memory (the whole page output
+     is buffered) which in turn is work for the garbage collector. And you've
+     to wait until the whole page is created which may make you feel that
+     it's indeed slower ..
+<p>
+     Since the buffered output allows to determine the pagesize, this
+     options sets the <code>Content-Length</code> header (
+     <a href="http://andrew2.andrew.cmu.edu/rfc/rfc2068.html" target="rfc">RFC2068</a>,
+     <a href="http://andrew2.andrew.cmu.edu/rfc/rfc2068.html#sec-14.14" target="rfc">14.14</a>).
+<p>
+<li> <strong><code>debug</code></strong> <em>(&quot;yes&quot;|&quot;no&quot;)</em><br>
+     - default no -<br>
+     Logs how long it took to process the page to the servlet log. Useful if you want to
+     experiment with the <code>compresslarge</code> and <code>buffered</code> options to 
+     see how it effects processing.
+<p>
+<li> <strong><code>charset</code></strong> <em>(String containing the charset)</em><br>
+     - default none -<br>
+     Set the charset.
+<p>
+    This option modifies the <code>Content-Type</code> Header. Usually, this is
+    set to <code>"text/html"</code>, with the charset attribute its something like e.g.
+    <code>"text/html; charset=koi8-r"</code>. (
+     <a href="http://andrew2.andrew.cmu.edu/rfc/rfc2068.html" target="rfc">RFC2068</a>,
+     <a href="http://andrew2.andrew.cmu.edu/rfc/rfc2068.html#sec-14.18" target="rfc">14.18</a>).
+<p>
+<li> <strong><code>PropagateParameters</code></strong> <em>(';'-seperated stringlist)</em><br>
+     <em><code>ParameterPropagatingSSI</code> only</em>: semicolon
+     seperated list of parameters to be propagated. See
+     <a href="parameterprop.html#parampropinst">installation section</a>
+     of the document describing this servlet.
+</ul>
+
+       With Apache JServ, you just have to insert a line in your
+       zone.properties file go apply these parameters:<br><em>Example:</em>
+<pre>
+       servlet.org.apache.servlet.ssi.SSI.initArgs=SSISiteRoot=/site/root,expires=-1000
+</pre>
+
+</blockquote>
+
+<h3>Usage</h3>
+<blockquote>
+<p>  
+  Servlet output may be included in an HTML document by use of the <SERVLET>
+  tag. For example, to embed the output of the HelloWorldServlet servlet in 
+  an HTML page, you might write the following:
+<pre>
+        ... (some HTML code) ...
+        &lt;SERVLET CODE="HelloWorldServlet.class"&gt;
+        Your web server has not been configured to support servlet tags.
+        &lt;/SERVLET&gt;
+        ... (more HTML code) ...
+</pre>
+<p>
+  When this page is served from the web server, the code above will be replaced
+  with the output of HelloWorldServlet. If you see the message between the tags 
+  instead, there is a problem with your server configuration. If this happens, 
+  check to make sure your file has a ".jhtml" extension and that the server is 
+  properly configured.
+<p>    
+  Two attributes are used by the &lt;SERVLET&gt; tag, and they are roughly 
+  equivalent:
+<ul>
+  <li> The CODE attribute may be set to the name of a class file (the ".class" 
+     extension is optional) containing the servlet to be run. This servlet must
+     be visible by the Apache JSSI servlet. 
+   <li> The NAME attribute may also be set to the name of the servlet to be run 
+     (with no class extension). 
+</ul>
+<p>
+  In some implementations of &lt;SERVLET&gt; tags, if both NAME and CODE attributes
+  are set, the servlet designated by CODE will then become available for future
+  use under the symbolic named designated by the NAME attribute. This is not
+  currently supported. 
+<p>
+  Note that both the &lt;SERVLET&gt; and &lt;/SERVLET&gt; tags must be present.       
+<p>    
+  You may send parameters to a servlet via the PARAM tag, which should be 
+  placed between the &lt;SERVLET&gt; and &lt;/SERVLET&gt; tags, like so:  
+<p>
+<pre>
+        &lt;SERVLET CODE="MyServlet.class"&gt;
+         &lt;PARAM NAME="param1" VALUE="valueOfParam1"&gt;
+         &lt;PARAM NAME="anotherParam" VALUE="valueOfAnotherParam"&gt;
+        &lt;/SERVLET&gt;
+</pre>
+<p>
+  You could then access these parameters from your servlet as follows:  
+<p>
+<pre>
+        public void doGet(HttpServletRequest req, HttpServletResponse res)
+        throws ServletException, IOException {
+            String param1 = req.getParameter("param1");
+            String anotherParam = req.getParameter("anotherParam");
+        }              
+</pre>
+
+  For use of the <a href="parameterprop.html">URL rewriting</a> and 
+  <a href="traditionalssi.html">traditional SSI</a> features please
+  follow the links.
+
+<p align="center"><font SIZE="-1">Copyright (c) 1997-99 <a HREF="http://java.apache.org/">The
+Java Apache Project</a>.<br>
+All rights reserved.</font></p>
+</body>
+</html>
+
+

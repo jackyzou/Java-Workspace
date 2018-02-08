@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE form-validation PUBLIC
+          "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.1.3//EN"
+          "http://jakarta.apache.org/commons/dtds/validator_1_1_3.dtd">
+
+<form-validation>
+
+<!--
+     This is a minimal Validator form file with a couple of examples.
+-->
+
+    <global>
+
+        <!-- An example global constant
+        <constant>
+            <constant-name>postalCode</constant-name>
+            <constant-value>^\d{5}\d*$</constant-value>
+        </constant>
+        end example-->
+
+    </global>
+
+    <formset>
+
+        <!-- An example form -->
+        <form name="LoginForm">
+            <field
+                property="username"
+                depends="required">
+                    <arg key="Login.username"/>
+            </field>
+            <field
+                property="password"
+                depends="required,mask">
+                    <arg key="Login.password"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                    </var>
+            </field>
+            </form>
+            
+     <form name="RegisterForm">
+          <field property="username" depends="required">
+       <arg key="Register.username"/>
+    </field>
+    <field property="password" depends="required">
+       <arg key="Register.password"/>
+    </field>
+   <field property="fname" depends="required">
+       <arg key="Register.fname"/>
+    </field>
+   <field property="lname" depends="required">
+       <arg key="Register.lname"/>
+   </field>
+   <field property="email" depends="required,email">
+        <arg key="Register.email"/>
+    </field>
+   <field property="phone" depends="required">
+       <arg key="Register.phone"/>
+   </field>
+  
+     
+    <field property="job" depends="required">
+       <arg key="Register.job"/>
+   </field>
+    <field property="add1" depends="required">
+       <arg key="Register.add1"/>
+   </field>
+   <field property="add2" depends="required">
+       <arg key="Register.add2"/>
+   </field>
+   <field property="city" depends="required">
+       <arg key="Register.city"/>
+   </field>
+   <field property="state" depends="required">
+       <arg key="Register.state"/>
+   </field>
+   <field property="country" depends="required">
+       <arg key="Register.country"/>
+   </field>
+   <field property="zip" depends="required">
+       <arg key="Register.zip"/>
+   </field>
+ </form>
+    
+      <form name="ReservationForm">
+            <field property="custid" depends="required">
+               <arg key="Reservation.custid"/>
+            </field>
+    
+    <field property="flightnum" depends="required">
+       <arg key="Reservation.flightnum"/>
+   </field>
+   <field property="flightname" depends="required">
+       <arg key="Reservation.flightname"/>
+    </field>
+   <field property="departure" depends="required">
+       <arg key="Reservation.departure"/>
+   </field>
+   <field property="arrival" depends="required">
+       <arg key="Reservation.arrival"/>
+   </field>
+  
+    
+    <field property="destination" depends="required">
+       <arg key="Reservation.destination"/>
+   </field>
+    <field property="seats" depends="required">
+       <arg key="Reservation.seats"/>
+   </field>
+ </form>
+        
+          <form name="CancellationForm">
+            <field property="cust_id" depends="required">
+        <arg key="Cancellation.cust_id"/>
+    </field>
+    <field property="flight_num" depends="required">
+       <arg key="Cancellation.flight_num"/>
+   </field>
+    
+    <field property="destination" depends="required">
+       <arg key="Cancellation.destination"/>
+   </field>
+   <field property="flight_name" depends="required">
+       <arg key="Cancellation.flight_name"/>
+   </field>
+  <field property="dep_time" depends="required">
+       <arg key="Cancellation.dep_time"/>
+   </field>
+   <field property="arriv_time" depends="required">
+       <arg key="Cancellation.arriv_time"/>
+   </field>
+   <field property="seat_num" depends="required">
+       <arg key="Cancellation.seat_num"/>
+   </field>
+   
+        </form>
+        <form name="TransForm">
+            <field
+                property="credit_num"
+                depends="required">
+                    <arg key="trans.credit_num"/>
+            </field>
+            <field
+                property="credit_type"
+                depends="required">
+                    <arg key="trans.credit_type"/>
+                    
+            </field>
+            <field
+                property="pin_num"
+                depends="required,mask">
+                    <arg key="trans.pin_num"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                    </var>
+                    
+            </field>
+        </form>
+   </formset>
+
+    <!-- An example formset for another locale -->
+    <formset language="fr">
+
+        <constant>
+            <constant-name>postalCode</constant-name>
+            <constant-value>^[0-9a-zA-Z]*$</constant-value>
+        </constant>
+
+        <!-- An example form -->
+        <form name="LoginForm">
+            <field
+                property="username"
+                depends="required">
+                    <arg key="LoginForm.username"/>
+            </field>
+            <field
+                property="password"
+                depends="required,mask">
+                    <arg key="LoginForm.password"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                    </var>
+            </field>
+        </form>
+
+   </formset>
+
+</form-validation>

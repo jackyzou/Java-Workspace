@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+
+<head>
+<!-- $Id: traditionalssi.html,v 1.3 1999/06/10 11:21:15 hzeller Exp $ -->
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+<title>Support of traditional SSI commands</title>
+</head>
+
+<body BGCOLOR="#FFFFFF">
+
+<p ALIGN="CENTER">
+<a href="index.html"><img SRC="images/java-apache-project.gif" BORDER="0" 
+WIDTH="609" HEIGHT="100"></a></p>
+
+<h1 ALIGN="CENTER">Support of traditional SSI commands</h1>
+
+The aim is to provide functionality similar to what the Apache
+<a href="http://www.apache.org/docs/mod/mod_include.html">
+<code>mod_include</code>
+</a>
+module has.
+You need this feature if you want to use <em>both</em>
+traditional SSI and the <code>&lt;SERVLET&gt;</code> 
+tag within the same page.
+<p>
+
+In order to make the commands work,
+you've to add the <code>SSISiteRoot</code> init
+argument. See the <a href="install.html#tradssi">installation instructions</a>.
+<p>
+
+<strong><em>Experimental</em></strong>. 
+Currently,
+only a subset of the Apache SSI directives is implemented, and their
+functionality is restricted as well. 
+Follow closely the development of Apache JSSI if you need more than 
+this.
+<p>
+
+You might want to check out the 
+<a href="http://www.apache.org/docs/mod/mod_include.html">
+<code>mod_include</code>
+documentation</a> (link to the web).
+This document implicitly refers to it when missing features
+are discussed.
+
+<H2>Commands</H2>
+
+A traditional SSI command has the syntax:
+
+<BLOCKQUOTE><CODE>
+&lt;!--#</CODE><EM>element attribute=value attribute=value ...</EM>
+<CODE> --&gt;
+</CODE></BLOCKQUOTE>
+
+The value will often be enclosed in double quotes; many commands only allow
+a single attribute-value pair.  Note that the comment terminator
+(<SAMP>--&gt;</SAMP>) should be preceded by whitespace to ensure that it
+isn't considered part of an SSI token.
+<P>
+The allowed elements are:<P>
+
+<DL>
+
+<DT><STRONG>config</STRONG>
+<DD>
+This command controls various aspects of the parsing. The valid attributes
+are:
+<DL>
+<DT>sizefmt
+<DD>The value sets the format to be used which displaying the size of a file.
+Valid values are <CODE>bytes</CODE> for a count in bytes, or
+<CODE>abbrev</CODE> for a count in Kb or Mb as appropriate.
+<DT>timefmt
+<DD>The value is a string to be used by the <CODE>strftime(3)</CODE> library
+routine when printing dates.
+</DL>
+errmsg is not implemented.
+
+<DT><STRONG>echo</STRONG>
+<DD>
+This command prints one of the include variables, defined below.
+If the variable is unset, it is printed as <CODE>(none)</CODE>.
+Any dates printed are subject to the currently configured <CODE>timefmt</CODE>.
+Attributes:
+<DL>
+<DT>var
+<DD>The value is the name of the variable to print.
+</DL>
+
+<DT><STRONG>fsize</STRONG>
+<DD>
+This command prints the size of the specified file, subject to the
+<CODE>sizefmt</CODE> format specification. Attributes:
+<DL>
+<DT>file
+<DD>The value is a path relative to the directory containing the current
+document being parsed.
+<DT>virtual
+<DD>The value is a (%-encoded) URL-path relative to the current document being
+parsed. If it does not begin with a slash (/) then it is taken to be relative
+to the current document.
+</DL>
+The virtual attribute does not know about aliases, URL rewriting and the
+like. Therefore, the result might be surprising to you.
+This restriction applies to all directives which work on files.
+
+<DT><STRONG>flastmod</STRONG>
+<DD>
+This command prints the last modification date of the specified file,
+subject to the <CODE>timefmt</CODE> format specification. The attributes are
+the same as for the <CODE>fsize</CODE> command.
+
+<DT><STRONG>include</STRONG>
+<DD>
+This command inserts the text of another document or file into the parsed
+file. Included files are not subject to the usual access control (unlike
+with Apache <code>mod_include</code>).
+
+The Apache IncludesNOEXEC feature is not implemented.
+It is not needed, as the exec and cgi SSI commands are missing either.
+
+An attribute defines the location of the document; the inclusion is done for
+each attribute given to the include command. The valid attributes are:
+<DL>
+<DT>file
+<DD>The value is a path relative to the directory containing the current
+document being parsed. It cannot contain <CODE>../</CODE>, nor can it be an
+absolute path. The <CODE>virtual</CODE> attribute should always be used
+in preference to this one.
+<DT>virtual
+<DD>The value is a (%-encoded) URL relative to the current document being
+parsed. The URL cannot contain a scheme or hostname, only a path and
+an optional query string. If it does not begin with a slash (/) then it
+is taken to be relative to the current document.
+</DL>
+A URL is constructed from the attribute, and the output the server
+would return if the URL were accessed by the client is included in the parsed
+output. Thus included files can be nested.
+
+</DL>
+
+<H2>Include Variables</H2>
+
+The only variables currently available are
+
+<DL>
+<DT>DATE_GMT
+<DD>The current date in Greenwich Mean Time.
+<DT>DOCUMENT_NAME
+<DD>The filename (excluding directories) of the document requested by the
+user.
+<DT>LAST_MODIFIED
+<DD>The last modification date of the document requested by the user.
+</DL>
+<P>
+
+No variable substitution is performed.
+
+<H2>Other restrictions</H2>
+
+The XBitHack Apache directive has no effect. (Which is not bad.)
+
+
+
+<p>
+
+<p align="center"><font SIZE="-1">Copyright (c) 1997-99 <a HREF="http://java.apache.org/">The
+Java Apache Project</a>.<br>
+All rights reserved.</font></p>
+</body>
+</html>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename Java project &apos;Write to File&apos; to &apos;Write and Read File&apos;&#x0A;- Original element: &apos;Write to File&apos;&#x0A;- Renamed element: &apos;Write to File&apos;&#x0A;- Update references to refactored element" description="Rename Java project &apos;Write to File&apos;" flags="7" id="org.eclipse.jdt.ui.rename.java.project" input="=Write to File" name="Write and Read File" references="true" stamp="1365531002886" version="1.0"/>
+</session>

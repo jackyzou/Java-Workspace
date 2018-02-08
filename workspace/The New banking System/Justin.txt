@@ -1,0 +1,6 @@
+Name: Justin
+Email: justin@gmail.com
+Phone Num: 1882 8827 
+Address: 1  deer ksdjf
+Balance: 123.0
+Type of Account: Checking Account

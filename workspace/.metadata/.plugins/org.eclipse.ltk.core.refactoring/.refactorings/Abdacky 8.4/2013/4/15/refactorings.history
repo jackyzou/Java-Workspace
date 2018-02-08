@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;HomePage.java&apos; to &apos;The New banking System/src/(default package)&apos;&#x0A;- Original project: &apos;Abdacky 8.4&apos;&#x0A;- Destination element: &apos;The New banking System/src/(default package)&apos;&#x0A;- Original element: &apos;HomePage.java&apos;" description="Copy compilation unit" destination="=The New banking System/src&lt;" element1="/src&lt;{HomePage.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1365781759956" units="1" version="1.0"/>
+</session>

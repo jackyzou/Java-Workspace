@@ -1,0 +1,6 @@
+Name: Jane
+Email: hello
+Phone Num: 234
+Address: sadf
+Balance: 18870.0
+Type of Account: Checking Account

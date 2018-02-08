@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Menu.java&apos; to &apos;Graphics and VK_keyboard/src/(default package)&apos;&#x0A;- Original project: &apos;Menu Bar&apos;&#x0A;- Destination element: &apos;Graphics and VK_keyboard/src/(default package)&apos;&#x0A;- Original element: &apos;Menu.java&apos;" description="Copy compilation unit" destination="=Graphics and VK_keyboard/src&lt;" element1="/src&lt;{Menu.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1364261152372" units="1" version="1.0"/>
+</session>

@@ -1,0 +1,58 @@
+import java.awt.Color;
+import java.awt.Container;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+
+
+public class savedTrip extends JFrame  // makes class
+{
+	private Container contentPane;
+private JLabel wood;
+
+	
+	
+	public savedTrip() 
+	{
+		createUserInterface();
+
+	}
+	
+	
+
+	
+	
+	
+	private void createUserInterface()
+	{
+		
+		//contentPane = what is in window
+		contentPane = getContentPane();
+		contentPane.setLayout(null);
+		contentPane.setVisible(true);
+		contentPane.setBackground(Color.white);
+		
+		
+		
+		
+		wood = new JLabel(new ImageIcon("wood_wallpaper_hp_png-1280x800.jpg"));
+		wood.setBounds(0,0,960,600);
+		contentPane.add(wood);
+		
+
+		setVisible(true);
+		setSize(960,600);
+		setTitle("Home Page");
+		
+
+	}
+	public static void main(String[] args) 
+	{
+		savedTrip AH = new savedTrip();
+		AH.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+	}
+
+}

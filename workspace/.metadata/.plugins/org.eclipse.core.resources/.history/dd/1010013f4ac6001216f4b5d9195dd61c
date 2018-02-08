@@ -1,0 +1,188 @@
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Cursor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+
+
+public class savedTrip extends JFrame  // makes class
+{
+	private Container contentPane;
+private JLabel wood;
+private JLabel seperate;
+private JButton rpsfinance;
+private JButton logo;
+
+private String name,email,phone,password,country,address,gender;
+
+	
+	
+	public savedTrip() 
+	{
+		createUserInterface();
+
+	}
+	
+	
+	public void getUserBasicInfo(String n, String e, String pass, String p, String a, String g, String c)
+	{
+		name = n;
+		email = e;
+		password = pass;
+		phone = p;
+		address= a;
+		gender= g;
+		country= c;
+		
+
+	}
+	
+	
+	
+	private void createUserInterface()
+	{
+		
+		//contentPane = what is in window
+		contentPane = getContentPane();
+		contentPane.setLayout(null);
+		contentPane.setVisible(true);
+		contentPane.setBackground(Color.white);
+		
+		
+		logo= new JButton(new ImageIcon("TPS-logo-med.png"));
+		logo.setBounds(26, 21, 50, 60 );
+		logo.setVisible(true);
+		contentPane.add( logo );
+		logo.addMouseListener( 
+				new MouseAdapter()
+				{
+				public void mouseEntered (MouseEvent me) { 
+					setCursor (Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				}
+				 public void mouseExited (MouseEvent me) { 
+					 setCursor (Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+				 }
+				}
+				 );
+		
+		logo.addActionListener(
+	    		  
+	    		  new ActionListener()
+	    		  {
+	    			  public void actionPerformed( ActionEvent event)
+	    			  {
+	    				
+	    				  logoActionPerformed( event );
+		
+	    
+	    			  }
+
+					private void logoActionPerformed(ActionEvent event) 
+					{
+						{
+							int k = JOptionPane.showConfirmDialog(null, 
+		            				" Are you sure you want to go home? "
+									, " Warning, might lose information! ", JOptionPane.YES_OPTION);
+		         		
+		         		//System.out.print(x);
+		         		
+		         		if(k == 1)
+		         		{
+		         			
+		         			//Means NO
+		         			System.out.print("NO");
+		         		}
+		         		
+		         		else if(k == 2)
+		         		{
+		         			
+		         			//Means Cancel
+		         			System.out.print("Cancel");
+		         		}
+		         		else 
+		         		{
+		         			MasterClass.goHome();
+							dispose();
+		         			//Means Yes
+		         			System.out.print("Yes");
+		         			
+		         		}
+						
+						}
+					}
+	    		  }
+		
+						);
+		
+		rpsfinance= new JButton(new ImageIcon("rpsFinance.png"));
+		rpsfinance.setBounds(120, 20, 125, 62 );
+		rpsfinance.setVisible(true);
+		contentPane.add( rpsfinance );
+		rpsfinance.addMouseListener( 
+				new MouseAdapter()
+				{
+				public void mouseEntered (MouseEvent me) { 
+					setCursor (Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				}
+				 public void mouseExited (MouseEvent me) { 
+					 setCursor (Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+				 }
+				}
+				 );
+		
+		rpsfinance.addActionListener(
+	    		  
+	    		  new ActionListener()
+	    		  {
+	    			  public void actionPerformed( ActionEvent event)
+	    			  {
+	    				
+	    				  signoutPerformed( event );
+		
+	    
+	    			  }
+
+					private void signoutPerformed(ActionEvent event) 
+					{
+						AccountHomePage ahp = new AccountHomePage();
+						AccountHomePage.getUserBasicInfo(name,email,phone,password,country,address,gender);
+						ahp.setVisible(true);
+					}
+	    		  }
+	    		  );
+		
+		seperate= new JLabel(new ImageIcon("seperate.png"));
+		seperate.setBounds(57, 0, 100, 104 );
+		seperate.setVisible(true);
+		contentPane.add( seperate );
+		
+		
+		wood = new JLabel(new ImageIcon("wood_wallpaper_hp_png-1280x800.jpg"));
+		wood.setBounds(0,0,960,600);
+		contentPane.add(wood);
+		
+
+		setVisible(true);
+		setSize(960,600);
+		setResizable(false);
+		setTitle("Saved Trip");
+		
+
+	}
+	public static void main(String[] args) 
+	{
+		savedTrip AH = new savedTrip();
+		AH.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+	}
+
+}

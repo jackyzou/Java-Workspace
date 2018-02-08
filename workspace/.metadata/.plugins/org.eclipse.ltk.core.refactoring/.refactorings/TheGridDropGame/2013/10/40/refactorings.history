@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Bug.java&apos; to &apos;TheGridThingAP/src/info.gridworld.actor&apos;&#x0A;- Original project: &apos;TheGridDropGame&apos;&#x0A;- Destination element: &apos;TheGridThingAP/src/info.gridworld.actor&apos;&#x0A;- Original element: &apos;info.gridworld.actor.Bug.java&apos;" description="Copy compilation unit" destination="=TheGridThingAP/src&lt;info.gridworld.actor" element1="/src&lt;info.gridworld.actor{Bug.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1380637517653" units="1" version="1.0"/>
+</session>

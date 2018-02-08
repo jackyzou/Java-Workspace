@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+
+<head>
+<!-- $Id: index.html,v 1.3 1999/06/10 11:21:15 hzeller Exp $ -->
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+<meta NAME="Author" CONTENT="Stefano Mazzocchi">
+<meta NAME="Author" CONTENT="Henner Zeller">
+<title>The Apache JSSI Project</title>
+</head>
+
+<body BGCOLOR="#FFFFFF">
+
+<p ALIGN="CENTER"><img SRC="images/java-apache-project.gif" BORDER="0" WIDTH="609"
+HEIGHT="100"></p>
+
+<h1 ALIGN="CENTER">The Apache JSSI Project</h1>
+
+<h3>What is it?</h3>
+
+<blockquote>
+  <p><strong>Apache JSSI</strong> is Java servlet that provides support for including
+  dynamic servlet output from within HTML documents via the &lt;SERVLET&gt; tag as specified
+  by the JavaSoft Java Web Server.</p>
+</blockquote>
+
+<h3>What does it do?</h3>
+
+<blockquote>
+  <p>Apache JSSI parses <em>JHTML</em> files, executes the servlets as specified by the
+  &lt;SERVLET&gt; tag and replaces those tags with the output of the executed servlet. The
+  &lt;SERVLET&gt; tag can be seen as the server side equivalent of the &lt;APPLET&gt; tag.</p>
+  <p>
+  Note that SSI files for java servlets are called <em>JHTML</em> files in the apache context
+  while <em>SHTML</em> files are usually for traditional SSI (like &lt;!--#ECHO --&gt;). This
+  is a bit confusing since in the Java Web Server (SUN) context <em>SHTML</em> files are
+  used for java servlet SSI files and <em>JHTML</em> is used for page compiled pages. Java
+  Apache SSI does <em>not</em> support page compiling.
+</blockquote>
+
+<h3>What else can it do?</h3>
+
+<blockquote>
+ <p> With the Apache JSSI you can do more: It understands some of the
+ <a href="traditionalssi.html">traditional &lt;!--# like SSI commands</a> and provides
+ the option to automatically <a href="parameterprop.html">rewrite URLs with parameters</a>
+ to allow session tracking with SSI pages.</p>
+There is an experimental feature which 
+<a href="install.html#compresslarge">compresses the output</a> if the
+pagesize exceeds a configurable limit and the browser accepts it.
+</blockquote>
+
+<h3>What do I need to use it?</h3>
+
+<blockquote>
+  <p>Apache JSSI is a servlet based on the 
+  <a href="http://java.sun.com/products/servlet/index.html" target="_top">JavaSoft Servlet API 2.0</a> and
+  can be executed by any web server that can execute such servlets.</p>
+  <p><a href="install.html">Install it</a> like any other servlet and map the
+  *.jhtml-extension to be handled with this servlet.</p>
+</blockquote>
+
+<h3>What can I find it?</h3>
+
+<blockquote>
+  <p>Apache JSSI may be find in the <a href="http://java.apache.org/jservssi/dist/">distribution section</a> or in the
+  &quot;jserv_ssi&quot; CVS module.</p>
+</blockquote>
+
+<h3>How do I contribute, fix bugs and so on?</h3>
+
+<blockquote>
+  <p>Send bug reports, suggestions and ideas to the main <a
+  href="http://java.apache.org/main/mail.html">Java Apache Mailing List</a>, specifying
+  [jservssi] in your mail subject.</p>
+</blockquote>
+
+<p align="center"><font SIZE="-1">Copyright (c) 1997-99 <a HREF="http://java.apache.org/">The
+Java Apache Project</a>.<br>
+All rights reserved.</font></p>
+</body>
+</html>

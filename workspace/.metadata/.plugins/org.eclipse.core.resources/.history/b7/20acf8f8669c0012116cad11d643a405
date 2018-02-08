@@ -1,0 +1,57 @@
+import java.awt.Container;
+
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+public class HomeScreen extends JFrame{
+
+	
+	private JButton createJButton, loginJButton,helpJButton;
+	private JLabel accountNumberJLabel, passwordJLabel;
+	private JTextField accountNumberJTextField;
+	private JPasswordField passwordJPasswordField;
+	
+	
+	
+	public HomeScreen()
+	{
+		 createUserInterface();
+	}
+	
+	private void createUserInterface()
+	{
+		Container contentPane = getContentPane();
+		contentPane.setLayout(null);
+		
+		//set up accountNumberJLabel
+		accountNumberJLabel = new JLabel("Enter Account Number");
+		accountNumberJLabel.setBounds(250,5,50,100);
+		contentPane.add( accountNumberJLabel );
+		
+		
+		
+		 createJButton = new JButton();
+		createJButton.setBounds(400,450,70,30);
+		createJButton.setText("Create");
+		contentPane.add( createJButton );
+		
+		 helpJButton = new JButton();
+		helpJButton.setBounds(480,455,15,15);
+		helpJButton.setText("?");
+		contentPane.add( helpJButton );
+		
+		
+		
+		
+		
+		setSize(500,500);
+		setTitle("Welcome to RPS Bank");
+		setVisible(true);
+		setResizable(false);
+		
+	}
+
+}

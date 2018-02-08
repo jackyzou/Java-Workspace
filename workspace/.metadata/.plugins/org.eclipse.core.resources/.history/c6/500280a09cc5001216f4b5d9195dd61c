@@ -1,0 +1,68 @@
+# -- standard errors --
+errors.header=<UL>
+errors.prefix=<LI>
+errors.suffix=</LI>
+errors.footer=</UL>
+# -- validator --
+errors.invalid={0} is invalid.
+errors.maxlength={0} can not be greater than {1} characters.
+errors.minlength={0} can not be less than {1} characters.
+errors.range={0} is not in the range {1} through {2}.
+errors.required={0} is required.
+errors.byte={0} must be an byte.
+errors.date={0} is not a date.
+errors.double={0} must be an double.
+errors.float={0} must be an float.
+errors.integer={0} must be an integer.
+errors.long={0} must be an long.
+errors.short={0} must be an short.
+errors.creditcard={0} is not a valid credit card number.
+errors.email={0} is an invalid e-mail address.
+# -- other --
+
+errors.cancel=Operation cancelled.
+errors.detail={0}
+errors.general=The process did not complete. Details should follow.
+errors.token=Request could not be completed. Operation is not in sequence.
+
+
+Login.username = User name 
+Login.password = Password
+
+
+Register.username = User name 
+Register.password=Password
+Register.fname=First Name
+Register.lname=Last Name
+Register.email=email
+Register.phone=Phone Number
+Register.job=Job
+Register.add1=Address1
+Register.add2=Address1
+Register.city=City Name
+Register.state=state Name
+Register.country=Country Name
+Register.zip=Zip Name
+
+
+Reservation.custid=Customer Id
+Reservation.flightnum=Flight Number
+Reservation.flightname=Flight Name
+Reservation.departure=Departure Time
+Reservation.arrival=Arrival Time
+
+Reservation.destination=Destination Place
+Reservation.seats=Number of Seats
+
+Cancellation.cust_id=Customer Id
+Cancellation.flight_num=Flight Number
+
+Cancellation.destination=Destination Place
+Cancellation.flight_name=Flight Name
+Cancellation.dep_time=Departure Time
+Cancellation.arriv_time=Arrival Time
+Cancellation.seat_num=Seat Number
+
+trans.credit_num=Credit Nuber
+trans.credit_type=Credit Type
+trans.pin_num=Pin number

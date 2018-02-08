@@ -1,0 +1,289 @@
+import java.awt.*;
+import java.awt.event.*;
+import java.util.Hashtable;
+
+import javax.swing.*;
+import javax.swing.border.*;
+
+public class Save extends JFrame
+{
+   
+   private JPanel BannerJPanel, TimeJPanel, 
+      FromWhenJPanel,PrincipalJPanel;
+   
+   private JRadioButton pAndpButton, pAndiButton;
+   private JTextField dateJTextField,amountMoneyJTextField,periodJTextField;
+
+   private JSlider volumeJSlider;
+   
+   private JButton periodJButton,calculateJButton,resetJButton;
+
+   private DateSlider myDateSlider;
+   private dateForInterest myDate;
+   // no-argument constructor
+   public Save()
+   {
+      createUserInterface();
+   }
+   
+   public void periodChanger(String period)
+   {
+	   periodJTextField.setText(period);
+	   System.out.println(period);
+   }
+   
+   // create and position GUI components
+   private void createUserInterface()
+   {
+      // get contentPane and set layout to null
+      Container contentPane = getContentPane();
+      contentPane.setBackground( Color.magenta );
+      contentPane.setLayout( null );
+      
+      
+      
+      // set up presetJPanel
+      BannerJPanel = new JPanel();
+      BannerJPanel.setLayout( null );
+      BannerJPanel.setBorder( new TitledBorder( 
+         "Interest Calculator" ) );
+      BannerJPanel.setBounds( 10, 10, 295, 75 );
+      BannerJPanel.setBackground( Color.PINK );
+      contentPane.add( BannerJPanel );
+      
+   // set up amJRadioButton
+      pAndpButton = new JRadioButton();
+      pAndpButton.setBounds( 5, 20, 170, 25 );
+      pAndpButton.setText( "Lump Fixed Deposit" );
+      pAndpButton.setBackground( Color.ORANGE );
+      BannerJPanel.add( pAndpButton );
+      pAndpButton.addActionListener( 
+    	      
+	            new ActionListener() 
+	            {
+	               public void actionPerformed( ActionEvent event )
+	               {
+	            	   pAndiButton.setSelected(false);
+
+	               }
+	               
+	            } 
+	            
+	         ); 
+      
+      // set up fmJRadioButton
+      pAndiButton = new JRadioButton();
+      pAndiButton.setBounds( 5, 45, 230, 25 );
+      pAndiButton.setText( "Interest Withdraw Time Deposit" );
+      pAndiButton.setBackground( Color.ORANGE );
+      BannerJPanel.add( pAndiButton );
+      pAndiButton.addActionListener( 
+    	      
+	            new ActionListener() 
+	            {
+	               public void actionPerformed( ActionEvent event )
+	               {
+	            	   pAndpButton.setSelected(false);
+
+	               }
+	               
+	            } 
+	            
+	         ); 
+     
+      TimeJPanel = new JPanel();
+      TimeJPanel.setLayout( null );
+      TimeJPanel.setBorder( new TitledBorder( 
+         "Period" ) );
+      TimeJPanel.setBounds( 10, 95, 295, 90 );
+      TimeJPanel.setBackground( Color.PINK );
+      contentPane.add( TimeJPanel );
+      
+     
+      periodJButton= new JButton();
+      periodJButton.setBounds( 70, 24, 150, 50 );
+      periodJButton.setText( "Select A Period" );
+      periodJButton.setBackground( Color.PINK );
+      TimeJPanel.add( periodJButton );
+      periodJButton.addActionListener(
+		         
+		         new ActionListener() 
+		         {
+		            
+		             public void actionPerformed ( ActionEvent event )
+		             {
+		            	 myDateSlider = new DateSlider();
+		          
+		             }
+
+		         } 
+
+		      );
+      
+      periodJTextField= new JTextField();
+      periodJTextField.setBounds( 230, 30, 50, 35  );
+
+      periodJTextField.setEditable( false );
+      periodJTextField.setHorizontalAlignment( JLabel.CENTER );
+      periodJTextField.setBackground( Color.GREEN );
+      TimeJPanel.add( periodJTextField );
+      
+     
+    
+      
+      // set up speakersJPanel
+      FromWhenJPanel = new JPanel();
+      FromWhenJPanel.setLayout( null );
+      FromWhenJPanel.setBorder( new TitledBorder( "Start Date" ) );
+      FromWhenJPanel.setBounds( 10, 190, 295, 90 );
+      FromWhenJPanel.setBackground( Color.PINK );
+      contentPane.add( FromWhenJPanel );
+      
+      
+      
+      // set up tuningJPanel
+      PrincipalJPanel = new JPanel();
+      PrincipalJPanel.setLayout( null );
+      PrincipalJPanel.setBorder( new TitledBorder( "Type in Principal" ) );
+      PrincipalJPanel.setBounds( 10, 280, 295, 90 );
+      PrincipalJPanel.setBackground( Color.PINK );
+      contentPane.add( PrincipalJPanel );
+      
+      // set up stationJTextField
+      dateJTextField = new JTextField();
+      dateJTextField.setBounds( 60, 24, 170, 50 );
+      dateJTextField.setText( "Click to choose a Date" );
+      dateJTextField.setEditable( false );
+      dateJTextField.setHorizontalAlignment( JLabel.CENTER );
+      dateJTextField.setBackground( Color.ORANGE );
+      FromWhenJPanel.add( dateJTextField );
+      dateJTextField.addMouseListener(new MouseAdapter(){
+          
+          public void mouseClicked(MouseEvent e)
+          {
+        	 myDate =new dateForInterest();
+          }
+          
+        }
+	);
+      
+      amountMoneyJTextField = new JTextField();
+      amountMoneyJTextField.setBounds( 25, 24, 250, 50  );
+      amountMoneyJTextField.setText( "Type in an Amount of Principal" );
+      amountMoneyJTextField.setEditable( true );
+      amountMoneyJTextField.setHorizontalAlignment( JLabel.CENTER );
+      amountMoneyJTextField.setBackground( Color.ORANGE );
+      PrincipalJPanel.add( amountMoneyJTextField );
+      amountMoneyJTextField.addMouseListener(new MouseAdapter(){
+          
+          public void mouseClicked(MouseEvent e)
+          {
+        	  amountMoneyJTextField.setText( "" );
+          }
+          
+        }
+	);
+      
+      
+      
+      // set up powerJButton
+      calculateJButton = new JButton();
+      calculateJButton.setBounds( 20, 385, 111, 90 );
+      calculateJButton.setText( "Calculate" );
+      calculateJButton.setBackground( Color.PINK );
+      contentPane.add( calculateJButton );
+      calculateJButton.addActionListener(
+		         
+		         new ActionListener() 
+		         {
+		            
+		             public void actionPerformed ( ActionEvent event )
+		             {
+		            	if(pAndpButton.isSelected())
+		            	{
+		                  int period = Integer.parseInt(periodJTextField.getText());
+		                  double principal = Double.parseDouble(amountMoneyJTextField.getText());
+		                  double total = 0;
+		                  
+		                  while(period>0 && period<=100)
+		                  {
+		                	  //for(double rate = 2.6;rate <= 100;rate=rate+0.2)
+		                	  double rate =0.26;
+		                	  while(rate<=100)
+		                	  {
+		                		  total = principal*period*rate+principal;
+		                		  
+		                		  JOptionPane.showMessageDialog(null, "The total is " + total + ".",
+		            						"Total", JOptionPane.PLAIN_MESSAGE); 
+		                		rate=rate+0.2;
+		                		break;
+		                	  }
+		                
+		         
+		                	
+		                  }
+		                  
+		            		
+		            		
+		            	}
+		            	if(pAndiButton.isSelected())
+		            	{
+		                  int period = Integer.parseInt(periodJTextField.getText());
+		                  double principal = Double.parseDouble(amountMoneyJTextField.getText());
+		                  double total = 0;
+		                  
+		                  while(period>0 && period<=100)
+		                  {
+		                	  //for(double rate = 1.5;rate <= 100;rate=rate+0.2)
+		                	  double rate = 0.15;
+		                	  while(rate<=100)
+		                	  {
+		                		  total = principal*period*rate+principal;
+		                		  
+		                		  JOptionPane.showMessageDialog(null, "The total is " + total + ".",
+		            				
+		                				 "Total", JOptionPane.PLAIN_MESSAGE); 
+		                		  rate=rate+0.19;
+		                		  break;
+		                		  
+		                	  }
+		                
+		         
+		                	
+		                  }
+		                  
+		            		
+		            		
+		            	}
+		             }
+
+		         } 
+
+		      );
+      
+      resetJButton = new JButton();
+      resetJButton.setBounds( 151, 385, 111, 90 );
+      resetJButton.setText( "Reset" );
+      resetJButton.setBackground( Color.PINK );
+      contentPane.add( resetJButton );
+  
+      
+      // set properties of application's window
+      setTitle( "Save for Interest" ); // set title bar text
+      setSize( 310, 520 ); // set window size
+      setVisible( true );  // display window
+
+   } // end method createUserInterface
+   
+   // main method
+   public static void main( String[] args ) 
+   {
+      Save application = new Save();
+      application.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+      
+
+   } // end method main
+
+} // end class Radio
+
+

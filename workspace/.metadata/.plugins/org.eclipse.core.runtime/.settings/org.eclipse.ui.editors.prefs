@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+lineNumberRuler=true
+org.eclipse.mylyn.tasks.ui.hyperlinks.detectors.task_stateMask=4194304
+org.eclipse.wst.xml.ui.internal.hyperlink.XMLHyperlinkDetector_stateMask=4194304
+overviewRuler_migration=migrated_3.1

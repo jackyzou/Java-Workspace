@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move 3 elements to &apos;JMapViewer/src&apos;&#x0A;- Original project: &apos;JMapViewer&apos;&#x0A;- Destination element: &apos;JMapViewer/src&apos;&#x0A;- Original elements:&#x0A;     JMapViewer_src.jar&#x0A;     JMapViewer.jar&#x0A;     JMapViewer_Demo.jar&#x0A;- Update references to refactored element" description="Move files" destination="/src" element1="JMapViewer_src.jar" element2="JMapViewer.jar" element3="JMapViewer_Demo.jar" files="3" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1368927416492" units="0" version="1.0"/>
+</session>

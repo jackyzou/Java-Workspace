@@ -1,0 +1,6 @@
+Name: JACKY
+Email: 1@
+Phone Num: 1123
+Address: 123
+Balance: 567812.0
+Type of Account: Checking Account

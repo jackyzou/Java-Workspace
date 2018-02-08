@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;RP_WITH_GUI.java&apos; to &apos;RelativelyPrime有public的/src/(default package)&apos;&#x0A;- Original project: &apos;RP_WITH_GUI2&apos;&#x0A;- Destination element: &apos;RelativelyPrime有public的/src/(default package)&apos;&#x0A;- Original element: &apos;RP_WITH_GUI.java&apos;&#x0A;- Update references to refactored element" description="Move compilation unit" destination="=RelativelyPrime有public的/src&lt;" element1="/src&lt;{RP_WITH_GUI.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1359503430941" units="1" version="1.0"/>
+</session>

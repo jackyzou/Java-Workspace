@@ -1,0 +1,254 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+import javax.swing.JOptionPane;
+
+import org.openstreetmap.gui.jmapviewer.Demo;
+
+import com.toedter.calendar.JCalendar;
+
+
+public class MasterClass 
+{
+	private static Home home;
+	private static SignUpPage signuppage;
+	private static About about;
+	private static LogoutScreen logoutpage;
+	private static JCalendar JCal;
+	private static Demo map;
+	
+	private static boolean loginState =false;
+	
+	private static String name,email,password,phone,address,gender,country;
+
+	
+	public MasterClass()
+	{
+
+		home = new Home();
+	
+	}
+	
+	public static void getAllInfo(String n, String e, String pass, String p, String a, String g, String c)
+	{
+		name = n;
+		email = e;
+		password = pass;
+		phone = p;
+		address= a;
+		gender= g;
+		country= c;
+		
+		
+	}
+	
+	
+	public static void signUp()
+	{
+		signuppage = new SignUpPage();
+
+		signuppage.setVisible(true);
+		home.setVisible(false);
+	}
+	public static void goBackHome()
+	{
+		signuppage.setVisible(false);
+		home.setVisible(true);
+	}
+	public static void exit()
+	{
+		signuppage.dispose();
+	}
+	public static void about()
+	{
+		
+		about = new About();	
+		about.setVisible(true);
+	}
+	public static void loginStateAlways()
+	{
+		loginState = true;
+		
+	}
+	public static void getLoginState()
+	{
+		home.getLoginState(loginState);
+		signuppage.getLoginState(loginState);
+		
+	}
+	public static void goHome()
+	{
+		
+		Home home = new Home();
+		home.setVisible(true);
+	}
+	public static void openAccountHomefromSignUp()
+	{
+		signuppage.setVisible(false);
+		AccountHome acounthome = new AccountHome();
+		acounthome.getUserBasicInfo(name,email,password,phone,address,gender,country);
+
+		acounthome.setVisible(true);
+	}
+	public static void openAccountHomefromHome()
+	{
+		home.setVisible(false);
+		AccountHome acounthome1 = new AccountHome();
+		acounthome1.getUserBasicInfo(name,email,password,phone,address,gender,country);
+
+		acounthome1.setVisible(true);
+	}
+	public static void login()
+	{
+		AccountHome acountHome = new AccountHome();
+		acountHome.getUserBasicInfo(name,email,password,phone,address,gender,country);
+		signuppage.dispose();
+	}
+	public static void logout()
+	{
+		LogoutScreen logoutpage =new LogoutScreen();
+		logoutpage.setVisible(true);
+	}
+	
+	public static void openMap()
+	{
+		Demo demo = new Demo();
+		demo.setVisible(true);
+	}
+
+	
+	public static void sendPass1(String Uname)
+	{
+		try {
+			readInfo(Uname);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		home.getPassword(password);
+	}
+	public static void sendPassforSUP(String Uname)
+	{
+		try {
+			readInfo(Uname);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		signuppage.getPassword(password);
+	}
+	public static void goToCal()
+	{
+		JCalendar JCal = new JCalendar();
+		JCal.setVisible(true);
+	}
+	
+
+	public void setDefaultCloseOperation(int exitOnClose) {
+
+		
+	}
+	
+	public static void writeInfo()
+	{   
+		try
+	  	{
+	  		// Create file 
+	  		FileWriter fstream = new FileWriter(name+".txt");
+	  		BufferedWriter out = new BufferedWriter(fstream);
+	 /* 		out.write(name+"\n");
+	  		out.write(email+"\n");
+	  		out.write(password+"\n");
+	  		out.write(phone+"\n");
+	  		out.write(address+"\n");
+	  		out.write(gender+"\n");
+	  		out.write(country+"\n");
+	  		
+	  		*/
+	  		
+	  		out.close();  //Close the output stream
+	   }
+	  
+	  catch (Exception e) //Catch exception if any
+	  {
+	  	System.err.println("Error: " + e.getMessage());
+	  }
+	  	
+	}
+	
+	public static void readInfo(String userN) 
+	{
+		try{
+			
+		
+		
+		name = userN;
+		System.out.println(name);
+		FileReader fstream = new FileReader(name+".txt");
+		BufferedReader in = new BufferedReader(fstream);
+		Scanner scan = new Scanner(in);
+		
+		
+		String s = "";
+		while(scan.hasNext())
+		{
+			s += scan.next() + "\n";
+		}
+		
+		String delim = "\n";
+		StringTokenizer t = new StringTokenizer(s,delim);
+		ArrayList <String> list  = new ArrayList<String>();
+		
+		while(t.hasMoreTokens())
+		{
+			list.add(t.nextToken());
+		}
+	
+		
+		name = list.get(0);
+		email = list.get(1);
+		password = list.get(2);
+		phone = list.get(3);
+		address = list.get(4);
+		gender = list.get(5);
+		country = list.get(6);
+		 
+
+		System.out.println("list 0 is: " + list.get(0));
+		System.out.println("list 1 is: " + list.get(1));
+		System.out.println("list 2 is: " + list.get(2));
+		System.out.println("list 3 is: " + list.get(3));
+		System.out.println("list 4 is: " + list.get(4));
+		System.out.println("list 5 is: " + list.get(5));
+		System.out.println("list 6 is: " + list.get(6));
+		
+		System.out.print(s);	
+
+		
+		
+		in.close();
+		scan.close();
+		}
+		catch(Exception x)
+		{
+			JOptionPane.showMessageDialog(null," This account hasn't be created yet, sorry! :( "
+					, " ERROR! ",
+					  JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	public static void dispose() {
+		// TODO Auto-generated method stub
+		dispose();
+	}
+
+	
+
+
+}

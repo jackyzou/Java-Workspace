@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+
+<head>
+<!-- $Id: parameterprop.html,v 1.3 1999/06/10 11:21:15 hzeller Exp $ -->
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+<meta NAME="Author" CONTENT="Henner Zeller">
+<title>Usage of the ParameterPropagating SSI</title>
+</head>
+
+<body BGCOLOR="#FFFFFF">
+
+<p ALIGN="CENTER"><a href="index.html"><img SRC="images/java-apache-project.gif" BORDER="0" 
+WIDTH="609" HEIGHT="100"></a></p>
+
+<h1 ALIGN="CENTER">Holding state with the ParameterPropagatingSSI</h1>
+<h3>The Background</h3>
+<blockquote><p>
+Servlet engines provide a method to hold a user
+session so that you're able to build complex applications on top of the usually
+stateless HTTP-Protocol. You can access this session from the HttpServletRequest with
+<code>getSession()</code> and are able to store any Object associated with that session.
+</p></blockquote><blockquote><p>
+A Session is represented by a unique string which allows the servlet engine to look
+up the session object. This string has to be carried back and forth with each
+request of the client to be able to identify the client belonging to the session.
+There are currently two methods, servlet engines use to accomplish this task:
+<ul>
+<li>using cookies</li>
+<li>with URL-rewriting</li>
+</ul>
+Cookies are name/value pairs stored at the Client (the browser) which can be requested
+by the server. Thus using cookies is an ideal method to track sessions.</p>
+<p>
+Unfortunalety, not all browsers support cookies and many people switch off the cookie support
+because of security concerns (that is a long story). 
+In that case, the servlet engine has to pass the sessionid as parameter with every form
+action or URL. In order to pass the SessionID in servlet generated
+URLs, the <code>HttpServletResponse</code> has a method <code>encodeURL()</code>
+which does that (the generated URL looks e.g. 
+  <code>http://www.foo.bar/servlet/SessionApp?sessionid=819ab810</code>)
+<p>
+For further information see the servlet documentation 
+or the chapter about 
+<a href="http://java.sun.com/docs/books/tutorial/servlets/client-state/session-tracking.html" target="_top">Session Tracking</a> in the Java Tutorial.
+</p></blockquote>
+
+<h3>The Problem</h3>
+<blockquote>
+<p>
+Embedding servlets in SSI-files (*.jthml) allows you to seperate program logic from 
+static layout. However, if you use sessions and the client doesn't support cookies 
+you're (or better: the <em>session</em> is) lost if the user chooses to follow a 
+link in the static part of the jhtml-file: it doesn't contain the parameter with the
+session so the next time you come over one of your application servlets there is no
+session ...
+</p>
+</blockquote>
+
+<h3>The Solution</h3>
+<blockquote><p>
+One solution to this problem would be to append a servlet call to each URL in the
+SSI-page in order to dump out the sessionid. Ugly. Error prone. Slow.
+</p>
+<p>
+The <code>ParameterPropagatingSSI</code> Servlet distributed with this Apache JSSI is
+able to rewrite <code>&lt;A HREF=..</code> URLs automatically. It appends GET-parameters 
+to any URL if the parameter passed to the page is not null. 
+You've just to specify which parameter name(s) you want to have propagated.
+In our example it would be the <code>sessionid</code> parameter which has to be propagated;
+Apache JServ uses the special parameter <code>JServSessionId</code> to hold the session. So
+you've to find out what name your servlet engine uses if you want to track the session.<p>
+BTW: URLs in <code>&lt;AREA&gt;</code> and <code>&lt;FRAME&gt;</code> tags are rewritten as
+well.
+</p>
+<p>
+Since you can propagate <em>any</em> parameter you can implement your own session 
+handling passing <em>your</em> own parameter(s) you need to track your users session.
+</p>
+</blockquote>
+
+<a name="parampropinst">
+<h3>Installation</h3>
+<blockquote>
+Installation is quite easy. The <code>ParameterPropagatingSSI</code> is a servlet
+which implements the normal &lt;SERVLET&gt;-SSI features (as well as the
+<a href="traditionalssi.html">traditional SSI</a>) so it can replace the usual
+SSI. So <a href="install.html">install it</a> like the normal SSI servlet.
+<p>
+You propably may choose to use a simple SSI to treat your *.jhtml-files and
+the <code>ParameterPropagatingSSI</code> for some other files e.g. *.pjhtml
+or something like that.
+</p>
+<p>
+You've to give the parameters to be propagated in the init-argument named
+<code>PropagateParameters</code> as semicolon separated list.
+<ul>
+<font size=-1>
+<code>PropagateParameters=JServSessionId;myvariable</code>
+</font>
+</ul>
+If you use Apache JServ as servlet engine, you've to give the init argument in
+your zone.properties file:
+<ul>
+<font size=-1>
+<code>servlet.org.apache.servlet.ssi.ParameterPropagatingSSI.initArgs=PropagateParameters=JServSessionId;myvariable</code>
+</font>
+</ul>
+</blockquote>
+<h4>Enjoy!</h4>
+<p align="center"><font SIZE="-1">Copyright (c) 1997-99 <a HREF="http://java.apache.org/">The
+Java Apache Project</a>.<br>
+All rights reserved.</font></p>
+</body>
+</html>
+
